@@ -1,7 +1,8 @@
-tensorflow
 flask
 flask_cors
+flask[async]
 opencv-python
 aiohttp
 nest_asyncio
 google-cloud-vision
+waitress

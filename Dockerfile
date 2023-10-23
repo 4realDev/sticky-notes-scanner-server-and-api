@@ -28,4 +28,5 @@ RUN cd /usr/local/src && ls -la  && pip install -r requirements.txt
 
 COPY *.py /usr/local/src
 
-CMD python app.py
+CMD python -m flask --app ./app.py run --host=0.0.0.0 
+#CMD waitress-serve --call 'flask:create_app'
