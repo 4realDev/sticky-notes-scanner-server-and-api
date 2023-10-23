@@ -1,0 +1,7 @@
+tensorflow
+flask
+flask_cors
+opencv-python
+aiohttp
+nest_asyncio
+tensorflow-object-detection-api
