@@ -4,3 +4,4 @@ flask_cors
 opencv-python
 aiohttp
 nest_asyncio
+google-cloud-vision

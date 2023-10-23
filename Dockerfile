@@ -19,6 +19,10 @@ RUN apt update && \
   cp object_detection/packages/tf2/setup.py . && \
   pip install .
 
+RUN --mount=type=secret,id=gitlab-pat wget --header "Authorization: Bearer $(cat /run/secrets/gitlab-pat)" https://gitlab.cando-image.com/api/v4/projects/469/packages/generic/model/0.0.1/workspace.zip && \
+  unzip workspace.zip && \
+  rm -f workspace.zip
+
 COPY requirements.txt /usr/local/src
 RUN cd /usr/local/src && ls -la  && pip install -r requirements.txt
 
