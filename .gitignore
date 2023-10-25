@@ -1,0 +1,5 @@
+workspace
+venv
+models
+.gcloud_serviceaccount.json
+.gitlab_pat
