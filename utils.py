@@ -36,8 +36,8 @@ def limit_img_size(img_path, target_filesize):
             # resize from img_orig to not lose quality
             img = img_orig.resize((int(new_width), int(new_height)))
 
-    img = cv2.cvtColor(np.asarray(img), cv2.COLOR_BGR2RGB)
-    return img
+    img_array = cv2.cvtColor(np.asarray(img), cv2.COLOR_BGR2RGB)
+    return [img.width, img.height, img_array]
 
 
 def get_timestamp_yyyy_mm_dd_hh_mm_ss() -> str:
