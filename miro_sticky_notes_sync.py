@@ -85,23 +85,6 @@ async def get_recognized_sticky_notes_data(
                 cropped_image['voting'] = get_voting_dots(
                     cropped_image['path'], timestamped_folder_path, DEBUG)
 
-            # cropped_image['path'] = cropped_image_file_path
-            # TODO: TEST WITHOUT RENAMING
-            # Rename the cropped image file name to the image's recognized ocr text
-            # (remove forbidden printable ASCII characters and add timestamp in front of name to prevent same names)
-            # [cropped_image_new_ocr_name, cropped_image_new_ocr_path] = rename_cropped_image_with_ocr_string(
-            #     cropped_image,
-            #     index,
-            #     cropped_image_file_path,
-            #     timestamped_folder_path
-            # )
-
-            # # Override cropped_image name with new set file name
-            # # and add path attribute to post the cropped image of the sticky note later inside the miro board
-            # cropped_image['name'] = cropped_image_new_ocr_name
-            # cropped_image['path'] = cropped_image_new_ocr_path
-            # TODO: TEST WITHOUT RENAMING
-
     print("\n")
 
     if DEBUG:
