@@ -1,6 +1,51 @@
+# move app.py into factory -> __init__.py inside flaskr folder (flask best practice)
 # run server locally
-# .\venv\Scripts\activate
+# .\env\Scripts\activate
 # python -m flask --app flaskr run
+
+# scan_sticky_notes returns:
+# {
+#     img_data: {
+#         width: number;
+#         height: number;
+#     },
+#     sticky_note_data: Array<{
+#         color: string;
+#         height: number;
+#         name: string;
+#         ocr_recognized_text: string;
+#         path: string;
+#         position: {
+#             ymin: number;
+#             xmin: number;
+#             ymax: number;
+#             xmax: number;
+#         };
+#         voting: number;
+#         width: number;
+#     }>,
+#     text_data: Array<{
+#         boxes: {
+#             bottomLeft: {
+#                 x: number;
+#                 y: number;
+#             };
+#             bottomRight: {
+#                 x: number;
+#                 y: number;
+#             };
+#             topLeft: {
+#                 x: number;
+#                 y: number;
+#             };
+#             topRight: {
+#                 x: number;
+#                 y: number;
+#             };
+#         };
+#         text: string;
+#     }>
+# }
 
 import os
 from flask import Flask, request
@@ -28,7 +73,6 @@ def create_app(test_config=None):
     # to solve cross origin issue
     cors = CORS(app)
 
-
     @app.route("/scan-sticky-notes", methods=["POST"])
     async def scan_sticky_notes():
 
@@ -41,6 +85,7 @@ def create_app(test_config=None):
         img = request.files["image"]
         numpy_array_img = cv2.imdecode(
             np.fromstring(img.read(), np.uint8), cv2.IMREAD_COLOR)
+        
         img_filename_with_extension = img.filename
         img_extension = os.path.splitext(img_filename_with_extension)[1]
 
@@ -89,6 +134,10 @@ def create_app(test_config=None):
             timestamped_folder_path
         )
 
+        # the uploaded image has to be limited in file size to work with gcloud ocr / tensorflow
+        # all detections and their coordinates are relative to the new resized image dimensions
+        # therefore the api has to return the new resized image dimensions with the detection coordinates
+        # (those are stored and return in img_data)
         numpy_array_img = limit_img_size(
             img_file_path,
             4500000,   # bytes
@@ -124,15 +173,22 @@ def create_app(test_config=None):
                 # to be able to detect only the remaining handwritten text
                 text_data = await asyncio.create_task(
                     get_recognized_text_data(
-                        numpy_array_img,
+                        numpy_array_img["img_array"],
                         timestamped_folder_path,
                         sticky_notes_data,
                         DEBUG
                     )
                 )
 
-                return {"sticky_note_data": sticky_notes_data, "text_data": text_data}
+                return {
+                    "img_data": {"width": numpy_array_img["width"], "height": numpy_array_img["height"]}, 
+                    "sticky_note_data": sticky_notes_data, 
+                    "text_data": text_data
+                }
 
             else:
-                return {"sticky_note_data": sticky_notes_data}
+                return {
+                    "img_data": {"width": numpy_array_img["width"], "height": numpy_array_img["height"]}, 
+                    "sticky_note_data": sticky_notes_data
+                }
     return app
