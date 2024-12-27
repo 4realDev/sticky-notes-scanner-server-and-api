@@ -5,6 +5,7 @@ import cv2
 from genericpath import exists
 import asyncio
 import nest_asyncio
+import tempfile
 
 import config
 
@@ -53,7 +54,8 @@ async def get_recognized_sticky_notes_data(
     cropped_bounding_boxes_images_data = crop_image_to_bounding_boxes_and_save_them(
         img,
         img_detection_data_list,
-        timestamped_folder_path
+        timestamped_folder_path,
+        DEBUG
     )
 
     print("\n")
@@ -122,40 +124,47 @@ async def get_recognized_sticky_notes_data(
 
 
 async def get_recognized_text_data(img: Mat, dest_folder_path: str, sticky_notes_data, DEBUG=False):
-    sticky_notes_data_detections = []
-    sticky_notes_data_detections = (
-        sticky_note['position'] for sticky_note in sticky_notes_data)
+    with tempfile.NamedTemporaryFile(suffix=".jpg", mode="wb", delete=True) as temp_jpg:
+        # TODO: Maybe find a better way without saving the image twice (only because of gcloud API)
+        temp_jpg.write(img_with_whiteout_stickies.tobytes())
+        img_text_bounding_boxes_name = temp_jpg.name
+        img_text_bounding_boxes_path = temp_jpg.name
+        
+        sticky_notes_data_detections = (sticky_note['position'] for sticky_note in sticky_notes_data)
 
-    img_with_whiteout_stickies = draw_rectangles(
-        img, sticky_notes_data_detections, (255, 255, 0), (255, 255, 0))
+        img_with_whiteout_stickies = draw_rectangles(
+            img, sticky_notes_data_detections, (255, 255, 0), (255, 255, 0))
 
-    img_text_bounding_boxes_name = "_debug_non_sticky_note_texts_scan.png"
-    img_text_bounding_boxes_path = os.path.join(
-        dest_folder_path, img_text_bounding_boxes_name)
 
-    # TODO: Maybe find a better way without saving the image twice (only because of gcloud API)
-    save_image_in_folder(
-        img_with_whiteout_stickies,
-        img_text_bounding_boxes_name,
-        dest_folder_path,
-    )
+        
+        if DEBUG:
+            img_text_bounding_boxes_name = "_debug_non_sticky_note_texts_scan.png"
+            img_text_bounding_boxes_path = os.path.join(
+                dest_folder_path, img_text_bounding_boxes_name)
 
-    texts_bounding_boxes_images_data = await asyncio.create_task(
-        get_ocr_detection_text_and_bounding_boxes(
-            img_text_bounding_boxes_path
+            save_image_in_folder(
+                img_with_whiteout_stickies,
+                img_text_bounding_boxes_name,
+                dest_folder_path,
+            )
+    
+        texts_bounding_boxes_images_data = await asyncio.create_task(
+            get_ocr_detection_text_and_bounding_boxes(
+                img_text_bounding_boxes_path
+            )
         )
-    )
+        
+        if DEBUG:
+            img_with_whiteout_stickies = draw_boxes(
+                img_with_whiteout_stickies, texts_bounding_boxes_images_data)
 
-    img_with_whiteout_stickies = draw_boxes(
-        img_with_whiteout_stickies, texts_bounding_boxes_images_data)
+            save_image_in_folder(
+                img_with_whiteout_stickies,
+                img_text_bounding_boxes_name,
+                dest_folder_path,
+            )
 
-    save_image_in_folder(
-        img_with_whiteout_stickies,
-        img_text_bounding_boxes_name,
-        dest_folder_path,
-    )
-
-    if DEBUG == False:
-        os.remove(img_text_bounding_boxes_path)
+        if DEBUG == False:
+            os.remove(img_text_bounding_boxes_path)
 
     return texts_bounding_boxes_images_data

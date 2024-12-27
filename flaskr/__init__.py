@@ -47,6 +47,7 @@
 #     }>
 # }
 
+import io
 import os
 from flask import Flask, request
 from flask_cors import CORS
@@ -57,6 +58,7 @@ from genericpath import exists
 import aiohttp
 import asyncio
 import nest_asyncio
+import tempfile
 
 from miro_sticky_notes_sync import get_recognized_sticky_notes_data, get_recognized_text_data
 
@@ -97,20 +99,20 @@ def create_app(test_config=None):
         print("\n")
 
         # 2. GET FLAG IF NON STICKY NOTE TEXT SHOULD BE SCANNED AS WELL
-        if "scan_whiteboard_text" in request.args:
+        if "scan_whiteboard_text=True" in request.args:
             scan_whiteboard_text = True
         else:
             scan_whiteboard_text = False
         print(f"scan_whiteboard_text flag is set to: {scan_whiteboard_text}")
 
-        if "scan_voting_dots" in request.args:
+        if "scan_voting_dots=True" in request.args:
             scan_voting_dots = True
         else:
             scan_voting_dots = False
         print(
             f"scan_voting_dots flag is set to: {scan_voting_dots}")
 
-        if "debug" in request.args:
+        if "debug=True" in request.args:
             DEBUG = True
         else:
             DEBUG = False
@@ -118,77 +120,86 @@ def create_app(test_config=None):
 
         print("\n")
 
-        # 3. CREATE TIMESTAMP FOLDER STRUCUTRE
-        timestamp = get_timestamp_yyyy_mm_dd_hh_mm_ss()
-        timestamped_folder_name = timestamp
-        timestamped_folder_path = create_timestamp_folder_and_return_its_path(
-            timestamped_folder_name)
+        with tempfile.NamedTemporaryFile(suffix=".jpg", mode="wb", delete=False) as temp_jpg:
+            img_file_path = temp_jpg.name
+            timestamped_folder_path = temp_jpg.name
+            
+            # 3. CREATE TIMESTAMP FOLDER STRUCUTRE
+            if DEBUG == True:
+                timestamp = get_timestamp_yyyy_mm_dd_hh_mm_ss()
+                timestamped_folder_name = timestamp
+                timestamped_folder_path = create_timestamp_folder_and_return_its_path(
+                    timestamped_folder_name)
 
-        # 4. SAVE IMAGE IN TIMESTAMP FOLDER
-        # TODO: Make this inside cloud
-        img_file_path = f"{os.path.join(timestamped_folder_path, img_filename_with_extension)}"
+                # 4. SAVE IMAGE IN TIMESTAMP FOLDER
+                # TODO: Make this inside cloud
+                img_file_path = f"{os.path.join(timestamped_folder_path, img_filename_with_extension)}"
 
-        save_image_in_folder(
-            numpy_array_img,
-            img_filename_with_extension,
-            timestamped_folder_path
-        )
-
-        # the uploaded image has to be limited in file size to work with gcloud ocr / tensorflow
-        # all detections and their coordinates are relative to the new resized image dimensions
-        # therefore the api has to return the new resized image dimensions with the detection coordinates
-        # (those are stored and return in img_data)
-        numpy_array_img = limit_img_size(
-            img_file_path,
-            4500000,   # bytes
-        )
-
-        # 5. START SCANNING PROCESS
-        async with aiohttp.ClientSession() as session:
-
-            # 6. SCAN STICKY NOTE OBJECTS AND THEIR OCR RECOGNIZED TEXT
-            # Use TFOD, Google Cloud Vision API and OpenCV to get the recognized sticky notes data
-            # in the given image from the passed img_file_path with the following information:
-            # bounding-box position         | sticky_note_data['position'] -> {"xmin": int, "xmax": int, "ymin": int, "ymax": int}
-            # image width                   | sticky_note_data['width'] -> int
-            # image height                  | sticky_note_data['height'] -> int
-            # recognized color              | sticky_note_data['color'] -> str
-            # file name of saved image      | sticky_note_data['name'] -> str
-            # detected ocr-text             | sticky_note_data['ocr_recognized_text'] -> str
-            # image as matrix array         | sticky_note_data['image'] -> array
-            # path where image was saved    | sticky_note_data['path'] -> str
-            sticky_notes_data = await asyncio.create_task(
-                get_recognized_sticky_notes_data(
-                    img_file_path,
-                    timestamped_folder_path,
-                    scan_voting_dots,
-                    DEBUG
+                save_image_in_folder(
+                    numpy_array_img,
+                    img_filename_with_extension,
+                    timestamped_folder_path
                 )
+            
+            success, encoded_img = cv2.imencode(".jpg", numpy_array_img)
+            temp_jpg.write(encoded_img.tobytes())
+
+
+            # the uploaded image has to be limited in file size to work with gcloud ocr / tensorflow
+            # all detections and their coordinates are relative to the new resized image dimensions
+            # therefore the api has to return the new resized image dimensions with the detection coordinates
+            # (those are stored and return in img_data)
+            numpy_array_img = limit_img_size(
+                img_file_path,
+                4500000,   # bytes
             )
 
-            # 7. SCAN TEXT ON WHITEBOARD
-            text_data = []
-            if scan_whiteboard_text:
-                # override all detections of the sticky notes with white polygones
-                # to be able to detect only the remaining handwritten text
-                text_data = await asyncio.create_task(
-                    get_recognized_text_data(
-                        numpy_array_img["img_array"],
+            # 5. START SCANNING PROCESS
+            async with aiohttp.ClientSession() as session:
+
+                # 6. SCAN STICKY NOTE OBJECTS AND THEIR OCR RECOGNIZED TEXT
+                # Use TFOD, Google Cloud Vision API and OpenCV to get the recognized sticky notes data
+                # in the given image from the passed img_file_path with the following information:
+                # bounding-box position         | sticky_note_data['position'] -> {"xmin": int, "xmax": int, "ymin": int, "ymax": int}
+                # image width                   | sticky_note_data['width'] -> int
+                # image height                  | sticky_note_data['height'] -> int
+                # recognized color              | sticky_note_data['color'] -> str
+                # file name of saved image      | sticky_note_data['name'] -> str
+                # detected ocr-text             | sticky_note_data['ocr_recognized_text'] -> str
+                # image as matrix array         | sticky_note_data['image'] -> array
+                # path where image was saved    | sticky_note_data['path'] -> str
+                sticky_notes_data = await asyncio.create_task(
+                    get_recognized_sticky_notes_data(
+                        img_file_path,
                         timestamped_folder_path,
-                        sticky_notes_data,
+                        scan_voting_dots,
                         DEBUG
                     )
                 )
 
-                return {
-                    "img_data": {"width": numpy_array_img["width"], "height": numpy_array_img["height"]}, 
-                    "sticky_note_data": sticky_notes_data, 
-                    "text_data": text_data
-                }
+                # 7. SCAN TEXT ON WHITEBOARD
+                text_data = []
+                if scan_whiteboard_text:
+                    # override all detections of the sticky notes with white polygones
+                    # to be able to detect only the remaining handwritten text
+                    text_data = await asyncio.create_task(
+                        get_recognized_text_data(
+                            numpy_array_img["img_array"],
+                            timestamped_folder_path,
+                            sticky_notes_data,
+                            DEBUG
+                        )
+                    )
 
-            else:
-                return {
-                    "img_data": {"width": numpy_array_img["width"], "height": numpy_array_img["height"]}, 
-                    "sticky_note_data": sticky_notes_data
-                }
+                    return {
+                        "img_data": {"width": numpy_array_img["width"], "height": numpy_array_img["height"]}, 
+                        "sticky_note_data": sticky_notes_data, 
+                        "text_data": text_data
+                    }
+
+                else:
+                    return {
+                        "img_data": {"width": numpy_array_img["width"], "height": numpy_array_img["height"]}, 
+                        "sticky_note_data": sticky_notes_data
+                    }
     return app
