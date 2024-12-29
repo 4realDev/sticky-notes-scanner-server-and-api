@@ -126,7 +126,6 @@ async def get_recognized_sticky_notes_data(
 async def get_recognized_text_data(img: Mat, dest_folder_path: str, sticky_notes_data, DEBUG=False):
     with tempfile.NamedTemporaryFile(suffix=".jpg", mode="wb", delete=True) as temp_jpg:
         # TODO: Maybe find a better way without saving the image twice (only because of gcloud API)
-        temp_jpg.write(img_with_whiteout_stickies.tobytes())
         img_text_bounding_boxes_name = temp_jpg.name
         img_text_bounding_boxes_path = temp_jpg.name
         
@@ -135,6 +134,7 @@ async def get_recognized_text_data(img: Mat, dest_folder_path: str, sticky_notes
         img_with_whiteout_stickies = draw_rectangles(
             img, sticky_notes_data_detections, (255, 255, 0), (255, 255, 0))
 
+        temp_jpg.write(img_with_whiteout_stickies.tobytes())
 
         
         if DEBUG:

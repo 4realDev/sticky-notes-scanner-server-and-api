@@ -97,22 +97,25 @@ def create_app(test_config=None):
             return f"Wrong file extension {img_extension}. Only .jpg and .png are accepted."
 
         print("\n")
+        print("TEST", request.args)
+        print(request.args.get("scan_whiteboard_text"))
+        print(request.args.get("scan_voting_dots"))
+        print(request.args.get("debug"))
 
         # 2. GET FLAG IF NON STICKY NOTE TEXT SHOULD BE SCANNED AS WELL
-        if "scan_whiteboard_text=True" in request.args:
+        if request.args.get("scan_whiteboard_text"):
             scan_whiteboard_text = True
         else:
             scan_whiteboard_text = False
         print(f"scan_whiteboard_text flag is set to: {scan_whiteboard_text}")
 
-        if "scan_voting_dots=True" in request.args:
+        if request.args.get("scan_voting_dots"):
             scan_voting_dots = True
         else:
             scan_voting_dots = False
-        print(
-            f"scan_voting_dots flag is set to: {scan_voting_dots}")
+        print(f"scan_voting_dots flag is set to: {scan_voting_dots}")
 
-        if "debug=True" in request.args:
+        if request.args.get("debug"):
             DEBUG = True
         else:
             DEBUG = False
