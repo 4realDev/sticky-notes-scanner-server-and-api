@@ -21,8 +21,8 @@
 
     ```python -m pip install --upgrade pip```
 
-***4.  Install PyYAML -> necessary for TensorFlow Object Detection***
-    ```pip install PyYAML==5.3.1```
+***4.  Install PyYAML -> necessary for TensorFlow Object Detection***  
+    `pip install PyYAML==5.3.1`
 
 ***5.  Clone Tensorflow Object Detection API / TensorFlow Model Garden***
     ```git clone https://github.com/tensorflow/models.git```
