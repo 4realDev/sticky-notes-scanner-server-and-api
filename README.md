@@ -1,6 +1,7 @@
 **IMPORTANT: Currently only tested with `Python 3.10.7`**  
 
 ***1.  Create Virtual Environment***  
+
 Advantages:  
     - Isolates all Python and library dependencies needed for TFOD model  
     - Ensures clean working environment  
@@ -11,11 +12,13 @@ Advantages:
     py -m venv env  
 
 ***2.  Start Virtual Environment with windows batch script in `Scripts/activate`***  
+
 (env) is visible and pip list only shows isolated packages (Lib/site-packages) in your environment  
 
     .\env\Scripts\activate
 
 ***3.  Update pip Libraries and Dependencies***  
+
 Ensure that we have latest resolvers and upgraded pip install app  
 In virtual environment run:  
 
@@ -36,20 +39,21 @@ In virtual environment run:
 ***7.  Run setup.py to install all necessary libraries for TensorFlow Object Detection***  
 
     cd models\research  
-
+  
     python -m pip install --use-feature=2020-resolver .  
 
 ***8.  Install Protoc and run protoc and all `.proto` files inside `models/research/object_detection/protos` folder***  
+
 Protoc "used to compile .proto files, which contain service and message definitions"  
 
     pip install --upgrade protobuf==3.20.0 
-
+  
     protoc object_detection/protos/*.proto --python_out=.
 
 ***9.  Install all required libraries for the API*** 
 
     cd ..\.. 
-
+  
     pip install -r requirements.txt`   
 
 Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio, google-cloud-vision
