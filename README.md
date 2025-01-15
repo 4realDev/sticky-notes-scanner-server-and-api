@@ -1,6 +1,6 @@
 ## Sticky Note Scanner API
 
-### SETUP AND INSTALLATION
+### I. SETUP AND INSTALLATION
 
 IMPORTANT: Currently only tested with `Python 3.10.7`
 
@@ -81,8 +81,9 @@ pip install -r requirements.txt
 ```   
 
 Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio, google-cloud-vision
+<br>
 
-### START API
+### II. START API
 
 #### 1. Start the Virtual Environment
 
