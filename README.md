@@ -2,11 +2,11 @@
 
 ***1.  Create Virtual Environment***  
 Advantages:  
-    -	Isolates all Python and library dependencies needed for TFOD model  
-    -	Ensures clean working environment  
-    -	Does not conflict with all other already installed libraries and dependencies on your machine  
-        -> no dependency conflicts  
-        -> Virtual environment has it’s own isolated packages under Lib/site-packages  
+    - Isolates all Python and library dependencies needed for TFOD model  
+    - Ensures clean working environment  
+    - Does not conflict with all other already installed libraries and dependencies on your machine  
+    -> no dependency conflicts  
+    -> Virtual environment has it’s own isolated packages under Lib/site-packages  
 
     py -m venv env  
 
@@ -52,9 +52,7 @@ Protoc "used to compile .proto files, which contain service and message definiti
 
     pip install -r requirements.txt`   
 
-Those are:  
-
-    flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio, google-cloud-vision
+Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio, google-cloud-vision
 
 ***10. Start API Server***  
 
