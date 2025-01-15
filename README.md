@@ -40,7 +40,6 @@ In virtual environment run:
 
     cd models\research
 <br>  
-
     python -m pip install --use-feature=2020-resolver .  
 
 ***8.  Install Protoc and run protoc and all `.proto` files inside `models/research/object_detection/protos` folder***  
@@ -49,14 +48,12 @@ Protoc "used to compile .proto files, which contain service and message definiti
 
     pip install --upgrade protobuf==3.20.0 
 <br>  
-
     protoc object_detection/protos/*.proto --python_out=.
 
 ***9.  Install all required libraries for the API*** 
 
     cd ..\.. 
 <br>  
-
     pip install -r requirements.txt`   
 
 Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio, google-cloud-vision
