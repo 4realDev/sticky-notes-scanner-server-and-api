@@ -1,10 +1,10 @@
 ## Sticky Note Scanner API
 
-### I. SETUP AND INSTALLATION
+## I. SETUP AND INSTALLATION
 
 IMPORTANT: Currently only tested with `Python 3.10.7`
 
-#### 1.  Create Virtual Environment
+### 1.  Create Virtual Environment
 Advantages:  
     - Isolates all Python and library dependencies needed for TFOD model  
     - Ensures clean working environment  
@@ -16,14 +16,14 @@ Advantages:
 py -m venv env
 ```
 
-#### 2.  Start Virtual Environment with windows batch script in `Scripts/activate`
+### 2.  Start Virtual Environment with windows batch script in `Scripts/activate`
 (env) is visible and pip list only shows isolated packages (Lib/site-packages) in your environment  
 
 ```
 .\env\Scripts\activate
 ```
 
-#### 3.  Update pip Libraries and Dependencies
+### 3.  Update pip Libraries and Dependencies
 Ensure that we have latest resolvers and upgraded pip install app  
 In virtual environment run:  
 
@@ -31,25 +31,25 @@ In virtual environment run:
 python -m pip install --upgrade pip
 ```
 
-#### 4.  Install `PyYAML` -> necessary for TensorFlow Object Detection
+### 4.  Install `PyYAML` -> necessary for TensorFlow Object Detection
 
 ```
 pip install PyYAML==5.3.1
 ```
 
-#### 5.  Clone Tensorflow Object Detection API / TensorFlow Model Garden
+### 5.  Clone Tensorflow Object Detection API / TensorFlow Model Garden
 
 ```
 git clone https://github.com/tensorflow/models.git
 ```
 
-#### 6.  Copy the `setup.py` inside the `models/research` folder 
+### 6.  Copy the `setup.py` inside the `models/research` folder 
 
 ```
 copy <YOUR_PATH>\models\research\object_detection\packages\tf2\setup.py <YOUR_PATH>\models\research
 ```
 
-#### 7.  Run setup.py to install all necessary libraries for TensorFlow Object Detection
+### 7.  Run setup.py to install all necessary libraries for TensorFlow Object Detection
 
 ```
 cd models\research
@@ -59,7 +59,7 @@ cd models\research
 python -m pip install --use-feature=2020-resolver .
 ``` 
 
-#### 8.  Install Protoc and run protoc and all `.proto` files inside `models/research/object_detection/protos` folder
+### 8.  Install Protoc and run protoc and all `.proto` files inside `models/research/object_detection/protos` folder
 Protoc "used to compile .proto files, which contain service and message definitions"  
 
 ```
@@ -70,7 +70,7 @@ pip install --upgrade protobuf==3.20.0
 protoc object_detection/protos/*.proto --python_out=.
 ```
 
-#### 9.  Install all required libraries for the API
+### 9.  Install all required libraries for the API
 
 ```
 cd ..\..
@@ -82,16 +82,17 @@ pip install -r requirements.txt
 
 Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio, google-cloud-vision
 <br>
+<br>
 
-### II. START API
+## II. START API
 
-#### 1. Start the Virtual Environment
+### 1. Start the Virtual Environment
 
 ```
 .\env\Scripts\activate
 ```
 
-#### 2.  Start the Server (localhost:5000)
+### 2.  Start the Server (localhost:5000)
 
 ```
 python -m flask --app flaskr run
