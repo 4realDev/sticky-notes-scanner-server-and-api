@@ -15,7 +15,6 @@ Advantages:
 ```
 py -m venv env
 ```
-<br>
 
 ### 2.  Start Virtual Environment with windows batch script in `Scripts/activate`
 (env) is visible and pip list only shows isolated packages (Lib/site-packages) in your environment  
@@ -23,7 +22,6 @@ py -m venv env
 ```
 .\env\Scripts\activate
 ```
-<br>
 
 ### 3.  Update pip Libraries and Dependencies
 Ensure that we have latest resolvers and upgraded pip install app  
@@ -32,28 +30,24 @@ In virtual environment run:
 ```
 python -m pip install --upgrade pip
 ```
-<br>
 
 ### 4.  Install `PyYAML` -> necessary for TensorFlow Object Detection
 
 ```
 pip install PyYAML==5.3.1
 ```
-<br>
 
 ### 5.  Clone Tensorflow Object Detection API / TensorFlow Model Garden
 
 ```
 git clone https://github.com/tensorflow/models.git
 ```
-<br>
 
 ### 6.  Copy the `setup.py` inside the `models/research` folder 
 
 ```
 copy <YOUR_PATH>\models\research\object_detection\packages\tf2\setup.py <YOUR_PATH>\models\research
 ```
-<br>
 
 ### 7.  Run setup.py to install all necessary libraries for TensorFlow Object Detection
 
@@ -64,9 +58,8 @@ cd models\research
 ```
 python -m pip install --use-feature=2020-resolver .
 ``` 
-<br>
 
-#### 8.  Install Protoc and run protoc and all `.proto` files inside `models/research/object_detection/protos` folder
+### 8.  Install Protoc and run protoc and all `.proto` files inside `models/research/object_detection/protos` folder
 Protoc "used to compile .proto files, which contain service and message definitions"  
 
 ```
@@ -76,9 +69,8 @@ pip install --upgrade protobuf==3.20.0
 ```
 protoc object_detection/protos/*.proto --python_out=.
 ```
-<br>
 
-#### 9.  Install all required libraries for the API
+### 9.  Install all required libraries for the API
 
 ```
 cd ..\..
@@ -89,9 +81,8 @@ pip install -r requirements.txt
 ```   
 
 Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio, google-cloud-vision
-<br>
 
-#### 10. Start API Server
+### 10. Start API Server
 
 ```
 python -m flask --app flaskr run
