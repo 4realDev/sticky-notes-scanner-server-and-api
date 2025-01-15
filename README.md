@@ -8,12 +8,12 @@
         -> no dependency conflicts
         -> Virtual environment has it’s own isolated packages under Lib/site-packages
 
-    ```py -m venv env```
+    py -m venv env
 
-***2.  Start Virtual Environment with windows batch script in Scripts/activate***
-    (env) is visible and pip list only shows isolated packages (Lib/site-packages) in your environment
+***2.  Start Virtual Environment with windows batch script in Scripts/activate***  
+    (env) is visible and pip list only shows isolated packages (Lib/site-packages) in your environment  
 
-    ```.\env\Scripts\activate```
+    .\env\Scripts\activate
 
 ***3.  Update pip libraries and dependencies***
     Ensure that we have latest resolvers and upgraded pip install app
