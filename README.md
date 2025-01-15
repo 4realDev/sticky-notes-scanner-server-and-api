@@ -39,7 +39,8 @@ In virtual environment run:
 ***7.  Run setup.py to install all necessary libraries for TensorFlow Object Detection***  
 
     cd models\research
-<br>  
+<br>
+
     python -m pip install --use-feature=2020-resolver .  
 
 ***8.  Install Protoc and run protoc and all `.proto` files inside `models/research/object_detection/protos` folder***  
@@ -47,13 +48,15 @@ In virtual environment run:
 Protoc "used to compile .proto files, which contain service and message definitions"  
 
     pip install --upgrade protobuf==3.20.0 
-<br>  
+<br>
+
     protoc object_detection/protos/*.proto --python_out=.
 
 ***9.  Install all required libraries for the API*** 
 
     cd ..\.. 
-<br>  
+<br>
+
     pip install -r requirements.txt`   
 
 Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio, google-cloud-vision
