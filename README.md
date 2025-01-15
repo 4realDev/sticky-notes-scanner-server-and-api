@@ -39,7 +39,6 @@ In virtual environment run:
 ***7.  Run setup.py to install all necessary libraries for TensorFlow Object Detection***  
 
     cd models\research
-
 <br>  
 
     python -m pip install --use-feature=2020-resolver .  
@@ -49,7 +48,6 @@ In virtual environment run:
 Protoc "used to compile .proto files, which contain service and message definitions"  
 
     pip install --upgrade protobuf==3.20.0 
-
 <br>  
 
     protoc object_detection/protos/*.proto --python_out=.
@@ -57,7 +55,6 @@ Protoc "used to compile .proto files, which contain service and message definiti
 ***9.  Install all required libraries for the API*** 
 
     cd ..\.. 
-
 <br>  
 
     pip install -r requirements.txt`   
