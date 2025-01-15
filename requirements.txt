@@ -5,5 +5,4 @@ opencv-python
 aiohttp
 nest_asyncio
 google-cloud-vision
-waitress
 protobuf==3.20.0
