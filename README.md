@@ -117,7 +117,6 @@ python -m flask --app flaskr run
             ymax: number;
             xmax: number;
         };
-        voting: number;
         width: number;
     }>,
     text_data: Array<{
@@ -151,11 +150,8 @@ http://localhost:5000/scan-sticky-notes
 
 with optional parameters:
 ```
-http://localhost:5000/scan-sticky-notes?scan_voting_dots=true?scan_whiteboard_text=true?debug=true
+http://localhost:5000/scan-sticky-notes?scan_whiteboard_text=true?debug=true
 ```
-
-`scan_voting_dots: boolean = False`
-scanning the red voting dots on physical sticky notes and synchronizing it inside the miro board as tag with the number of votes  
 
 `scan_whiteboard_text: boolean = False`  
 scanning text on the whiteboard and synchronizing it inside the miro board as text widget
