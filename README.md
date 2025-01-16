@@ -2,7 +2,9 @@
 
 ## I. SETUP AND INSTALLATION
 
-IMPORTANT: Currently only tested with `Python 3.10.7`
+IMPORTANT: 
+- Currently only tested with `Python 3.10.7`  
+- Run all commands in Windows PowerShell
 
 ### 1.  Create Virtual Environment
 Advantages:  
