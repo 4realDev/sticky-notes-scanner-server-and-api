@@ -23,27 +23,6 @@
 #         };
 #         width: number;
 #     }>,
-#     text_data: Array<{
-#         boxes: {
-#             bottomLeft: {
-#                 x: number;
-#                 y: number;
-#             };
-#             bottomRight: {
-#                 x: number;
-#                 y: number;
-#             };
-#             topLeft: {
-#                 x: number;
-#                 y: number;
-#             };
-#             topRight: {
-#                 x: number;
-#                 y: number;
-#             };
-#         };
-#         text: string;
-#     }>
 # }
 
 import io
@@ -59,7 +38,7 @@ import asyncio
 import nest_asyncio
 import tempfile
 
-from miro_sticky_notes_sync import get_recognized_sticky_notes_data, get_recognized_text_data
+from miro_sticky_notes_sync import get_recognized_sticky_notes_data
 
 from utils import \
     create_timestamp_folder_and_return_its_path, \
@@ -95,14 +74,7 @@ def create_app(test_config=None):
         else:
             return f"Wrong file extension {img_extension}. Only .jpg and .png are accepted."
 
-        scan_whiteboard_text = False
         DEBUG = False
-
-        # 2. GET FLAG IF NON STICKY NOTE TEXT SHOULD BE SCANNED AS WELL
-        if request.args.get("scan_whiteboard_text") == "True":
-            scan_whiteboard_text = True
-        print(f"scan_whiteboard_text flag is set to: {scan_whiteboard_text}")
-
         if request.args.get("debug") == "True":
             DEBUG = True
         print(f"debug flag is set to: {DEBUG}")
@@ -165,29 +137,8 @@ def create_app(test_config=None):
                     )
                 )
 
-                # 7. SCAN TEXT ON WHITEBOARD
-                text_data = []
-                if scan_whiteboard_text:
-                    # override all detections of the sticky notes with white polygones
-                    # to be able to detect only the remaining handwritten text
-                    text_data = await asyncio.create_task(
-                        get_recognized_text_data(
-                            numpy_array_img["img_array"],
-                            timestamped_folder_path,
-                            sticky_notes_data,
-                            DEBUG
-                        )
-                    )
-
-                    return {
-                        "img_data": {"width": numpy_array_img["width"], "height": numpy_array_img["height"]}, 
-                        "sticky_note_data": sticky_notes_data, 
-                        "text_data": text_data
-                    }
-
-                else:
-                    return {
-                        "img_data": {"width": numpy_array_img["width"], "height": numpy_array_img["height"]}, 
-                        "sticky_note_data": sticky_notes_data
-                    }
+                return {
+                    "img_data": {"width": numpy_array_img["width"], "height": numpy_array_img["height"]}, 
+                    "sticky_note_data": sticky_notes_data
+                }
     return app
