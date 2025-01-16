@@ -97,3 +97,67 @@ Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio
 ```
 python -m flask --app flaskr run
 ```
+
+## III. Returned Data
+```
+{
+    img_data: {
+        width: number;
+        height: number;
+    },
+    sticky_note_data: Array<{
+        color: string;
+        height: number;
+        name: string;
+        ocr_recognized_text: string;
+        path: string;
+        position: {
+            ymin: number;
+            xmin: number;
+            ymax: number;
+            xmax: number;
+        };
+        voting: number;
+        width: number;
+    }>,
+    text_data: Array<{
+        boxes: {
+            bottomLeft: {
+                x: number;
+                y: number;
+            };
+            bottomRight: {
+                x: number;
+                y: number;
+            };
+            topLeft: {
+                x: number;
+                y: number;
+            };
+            topRight: {
+                x: number;
+                y: number;
+            };
+        };
+        text: string;
+    }>
+}
+```
+
+IV. API Request
+```
+http://localhost:5000/scan-sticky-notes
+```
+with optional parameters:
+```
+http://localhost:5000/scan-sticky-notes?scan_voting_dots=true?scan_whiteboard_text=true?debug=true
+```
+
+`scan_voting_dots: boolean = False`
+scanning the red voting dots on physical sticky notes and synchronizing it inside the miro board as tag with the number of votes  
+
+`scan_whiteboard_text: boolean = False`  
+scanning text on the whiteboard and synchronizing it inside the miro board as text widget
+
+`debug: boolean = False`  
+saving images of the cropped sticky notes, the object detection scan, the voting dot detection and the text detection inside ´miro-timeframe-snapshots/[timestamp]´ folder
