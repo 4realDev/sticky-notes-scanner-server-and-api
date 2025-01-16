@@ -19,9 +19,6 @@ from miro_ocr_functions import \
     detect_text_with_gcloud_vision_api, \
     crop_image_to_bounding_boxes_and_save_them
 
-from miro_voting_dots_detection import \
-    get_voting_dots
-
 from utils import \
     save_image_in_folder, \
     draw_boxes, \
@@ -36,7 +33,6 @@ min_score_thresh = config.min_score_thresh
 async def get_recognized_sticky_notes_data(
     img_file_path: str,
     timestamped_folder_path: str,
-    scan_voting_dots=False,
     DEBUG=False
 ) -> list:
 
@@ -82,10 +78,6 @@ async def get_recognized_sticky_notes_data(
             )
 
             cropped_image['ocr_recognized_text'] = cropped_image_ocr_detections.text
-
-            if scan_voting_dots:
-                cropped_image['voting'] = get_voting_dots(
-                    cropped_image['path'], timestamped_folder_path, DEBUG)
 
     print("\n")
 

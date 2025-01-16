@@ -146,10 +146,6 @@ def get_detected_text_block_bounding_boxes(detection):
                 "bottomLeft": {"x": block.bounding_box.vertices[3].x, "y": block.bounding_box.vertices[3].y},
                 "bottomRight": {"x": block.bounding_box.vertices[2].x, "y": block.bounding_box.vertices[2].y},
             }
-            
-            # remove black circles from voting dot detection, if there are any
-            block_text = block_text.replace("●", "")
-
 
             bounds.append(
                 {"boxes": block_bounding_box, "text": block_text})
