@@ -135,6 +135,7 @@ http://localhost:5000/scan-sticky-notes?debug=true
 ```
 
 `debug: boolean = False`  
+
 If the `debug` flag is set to `True`, the api will create a folder named `miro-timeframe-snapshots` in which all the important data will be saved as images.
 For every scan there will be a subfolder inside `miro-timeframe-snapshots` named after the timestamp -> `miro-timeframe-snapshots/[timestamp]`
 Inside the subfolder of each scan the following images will be saved:
