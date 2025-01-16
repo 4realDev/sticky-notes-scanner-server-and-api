@@ -144,10 +144,11 @@ python -m flask --app flaskr run
 }
 ```
 
-IV. API Request
+## IV. API Request
 ```
 http://localhost:5000/scan-sticky-notes
 ```
+
 with optional parameters:
 ```
 http://localhost:5000/scan-sticky-notes?scan_voting_dots=true?scan_whiteboard_text=true?debug=true
