@@ -121,27 +121,6 @@ python -m flask --app flaskr run
         };
         width: number;
     }>,
-    text_data: Array<{
-        boxes: {
-            bottomLeft: {
-                x: number;
-                y: number;
-            };
-            bottomRight: {
-                x: number;
-                y: number;
-            };
-            topLeft: {
-                x: number;
-                y: number;
-            };
-            topRight: {
-                x: number;
-                y: number;
-            };
-        };
-        text: string;
-    }>
 }
 ```
 
@@ -152,11 +131,14 @@ http://localhost:5000/scan-sticky-notes
 
 with optional parameters:
 ```
-http://localhost:5000/scan-sticky-notes?scan_whiteboard_text=true?debug=true
+http://localhost:5000/scan-sticky-notes?debug=true
 ```
 
-`scan_whiteboard_text: boolean = False`  
-scanning text on the whiteboard and synchronizing it inside the miro board as text widget
-
 `debug: boolean = False`  
-saving images of the cropped sticky notes, the object detection scan, the voting dot detection and the text detection inside ´miro-timeframe-snapshots/[timestamp]´ folder
+If the `debug` flag is set to `True`, the api will create a folder named `miro-timeframe-snapshots` in which all the important data will be saved as images.
+For every scan there will be a subfolder inside `miro-timeframe-snapshots` named after the timestamp -> `miro-timeframe-snapshots/[timestamp]`
+Inside the subfolder of each scan the following images will be saved:
+- the original image with the timestamp (o.i.)
+- the object detection of the sticky notes inside the o.i.
+- the optical character recognition of the sticky note texts inside the o.i.
+- all sticky notes cropped out of the o.i. as single images
