@@ -1,4 +1,4 @@
-## Sticky Note Scanner API
+# Sticky Note Scanner - API
 
 ## I. SETUP AND INSTALLATION
 
