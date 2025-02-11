@@ -1,11 +1,10 @@
 # Sticky Note Scanner - API
 
+**IMPORTANT:** 
+>- Currently only tested with `Python 3.10.7`  
+>- Run all commands in Windows PowerShell
+
 ## I. SETUP AND INSTALLATION
-
-IMPORTANT: 
-- Currently only tested with `Python 3.10.7`  
-- Run all commands in Windows PowerShell
-
 ### 1.  Create Virtual Environment
 Advantages:  
     - Isolates all Python and library dependencies needed for TFOD model  
