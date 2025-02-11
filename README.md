@@ -143,3 +143,20 @@ Inside the subfolder of each scan the following images will be saved:
 - the object detection of the sticky notes inside the o.i.
 - the optical character recognition of the sticky note texts inside the o.i.
 - all sticky notes cropped out of the o.i. as single images
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+---
+
+## Sticky Note Scanner
+### Preview
+https://vimeo.com/803506423
+
+![2_Eval_Homeoffice_Phase_4](https://github.com/user-attachments/assets/a6f2cbac-0a08-4ea7-8645-9c820c1db46d)
+
+![_debug_all_texts_scan](https://github.com/user-attachments/assets/40953c50-f045-4f95-83d5-b7a65ba10c8b)
+
+![_debug_sticky_notes_scan](https://github.com/user-attachments/assets/8d090d06-2c4a-4893-912b-ac25db1a37c2)
