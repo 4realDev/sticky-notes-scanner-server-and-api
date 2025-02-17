@@ -87,9 +87,6 @@ protoc object_detection/protos/*.proto --python_out=.
 pip install --upgrade protobuf==3.20.3
 ```
 
-<br>
-<br>
-
 ### 9. Setup Google Cloud Vision API for Optical Character Recognition
 ***Follow the instructions inside:*** [README_how_to_register_with_google_cloud_api_ocr](https://gitlab.cando-image.com/toolbox/toolbox-scanning-api/-/blob/main/README_how_to_register_with_google_cloud_api_ocr.docx)
 
@@ -97,7 +94,6 @@ or
 
 Google Setup Documentation ["Cloud Vision setup and cleanup"](https://cloud.google.com/vision/docs/setup)\
 Google Usage Documentation ["Using the Vision API"](https://gcloud.readthedocs.io/en/latest/vision-usage.html)
-
 
 ## II. START API
 
@@ -116,7 +112,6 @@ python -m flask --app flaskr run
 ### 3. Troubleshoot
 Sometimes there is a problem with the `protobuf` version.
 If the following problem occures, run those commands:
-
 
 `ImportError: cannot import name 'string_int_label_map_pb2' from 'object_detection.protos' (C:\GitHub\toolbox-scanning-api\venv\lib\site-packages\object_detection\protos\__init__.py)`
 
