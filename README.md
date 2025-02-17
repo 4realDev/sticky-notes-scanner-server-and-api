@@ -78,7 +78,7 @@ python -m pip install .
 Protoc "used to compile .proto files, which contain service and message definitions"  
 
 ```
-pip install --upgrade protobuf==3.20.0
+pip install --upgrade protobuf==3.20.3
 ```
 
 ```
