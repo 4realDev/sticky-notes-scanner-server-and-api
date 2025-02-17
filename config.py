@@ -33,7 +33,7 @@ save_image_overlayed_with_ocr_visualization = True
 
 # necessary for cmd commands
 BASE_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)))
-CUSTOM_MODEL_NAME_SUFFIX = 'sticky_notes_custom_detection_model'
+CUSTOM_MODEL_NAME_SUFFIX = 'sticky_notes'
 PRETRAINED_MODEL_NAME = 'ssd_resnet50_v1_fpn_640x640_coco17_tpu-8'
 num_steps = 25000
 CUSTOM_MODEL_NAME = f'{CUSTOM_MODEL_NAME_SUFFIX}_{PRETRAINED_MODEL_NAME}_{str(num_steps)}'
