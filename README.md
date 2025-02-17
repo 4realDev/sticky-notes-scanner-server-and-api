@@ -46,11 +46,13 @@ In virtual environment run:
 python -m pip install --upgrade pip
 ```
 
-### 4.  Install `PyYAML` -> necessary for TensorFlow Object Detection
+### 4.  Install all required libraries for the API
 
 ```
-pip install PyYAML==5.3.1
-```
+pip install -r requirements.txt
+```   
+
+Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio, google-cloud-vision
 
 ### 5.  Clone Tensorflow Object Detection API / TensorFlow Model Garden
 
@@ -78,24 +80,21 @@ python -m pip install .
 Protoc "used to compile .proto files, which contain service and message definitions"  
 
 ```
-pip install --upgrade protobuf==3.20.3
-```
-
-```
 protoc object_detection/protos/*.proto --python_out=.
 ```
 
-### 9.  Install all required libraries for the API
+```
+pip uninstall protobuf
+```
+
+```
+pip install --upgrade protobuf==3.20.3
+```
 
 ```
 cd ..\..
 ```
 
-```
-pip install -r requirements.txt
-```   
-
-Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio, google-cloud-vision
 <br>
 <br>
 
@@ -113,7 +112,7 @@ Google Usage Documentation ["Using the Vision API"](https://gcloud.readthedocs.i
 ### 1. Start the Virtual Environment
 
 ```
-.\env\Scripts\activate
+.\venv\Scripts\activate
 ```
 
 ### 2.  Start the Server (localhost:5000)
