@@ -152,10 +152,23 @@ Inside the subfolder of each scan the following images will be saved:
 
 ## Sticky Note Scanner
 ### Preview
-https://vimeo.com/803506423
+***Showreal Video:*** https://vimeo.com/803506423
 
+<br/>
+
+***Image of a Miro Whiteboard Scan/Digitalisation with:***
+- all digitalised sticky notes on the left (`text, color, position, size`),
+- the cropped out original sticky notes in the middle (`cropped-image, position, size`),
+- and the original scan on the right:
 ![2_Eval_Homeoffice_Phase_4](https://github.com/user-attachments/assets/a6f2cbac-0a08-4ea7-8645-9c820c1db46d)
 
+<br/>
+
+***Debug Image of the Optical Character Recognition with the Google Cloud Vision API and its OCR Functionality:***
 ![_debug_all_texts_scan](https://github.com/user-attachments/assets/40953c50-f045-4f95-83d5-b7a65ba10c8b)
 
+<br/>
+
+***Debug Image of the Sticky Note Object Detection with the TensorFlow Custom Object Detection Model:***
 ![_debug_sticky_notes_scan](https://github.com/user-attachments/assets/8d090d06-2c4a-4893-912b-ac25db1a37c2)
+<br/>
