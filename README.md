@@ -6,16 +6,20 @@
 
 ## I. SETUP AND INSTALLATION
 ### 1.  Create Virtual Environment
-Advantages:  
-    - Isolates all Python and library dependencies needed for TFOD model  
-    - Ensures clean working environment  
-    - Does not conflict with all other already installed libraries and dependencies on your machine  
-    -> no dependency conflicts  
-    -> Virtual environment has it’s own isolated packages under Lib/site-packages  
+Clone Repository.
+Navigate into root directory.
+Create Virtual Environment.
 
 ```
 py -m venv env
 ```
+
+Advantages:  
+- Isolates all Python and library dependencies needed for TFOD model  
+- Ensures clean working environment  
+- Does not conflict with all other already installed libraries and dependencies on your machine  
+-> no dependency conflicts  
+-> Virtual environment has it’s own isolated packages under Lib/site-packages  
 
 ### 2.  Start Virtual Environment with windows batch script in `Scripts/activate`
 (env) is visible and pip list only shows isolated packages (Lib/site-packages) in your environment  
