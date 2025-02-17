@@ -6,8 +6,18 @@
 
 ## I. SETUP AND INSTALLATION
 ### 1.  Create Virtual Environment
-Clone Repository.
-Navigate into root directory.
+Clone Repository:
+
+```
+git clone https://gitlab.cando-image.com/toolbox/toolbox-scanning-api.git
+```
+
+Navigate into root directory:
+
+```
+cd toolbox-scanning-api
+```
+
 Create Virtual Environment.
 
 ```
@@ -51,7 +61,7 @@ git clone https://github.com/tensorflow/models.git
 ### 6.  Copy the `setup.py` inside the `models/research` folder 
 
 ```
-copy <YOUR_PATH>\models\research\object_detection\packages\tf2\setup.py <YOUR_PATH>\models\research
+copy [YOUR_PATH]\models\research\object_detection\packages\tf2\setup.py [YOUR_PATH]\models\research
 ```
 
 ### 7.  Run setup.py to install all necessary libraries for TensorFlow Object Detection
@@ -61,7 +71,7 @@ cd models\research
 ```
 
 ```
-python -m pip install --use-feature=2020-resolver .
+python -m pip install .
 ``` 
 
 ### 8.  Install Protoc and run protoc and all `.proto` files inside `models/research/object_detection/protos` folder
