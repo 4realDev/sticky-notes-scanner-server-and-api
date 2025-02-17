@@ -67,11 +67,6 @@ async def get_recognized_sticky_notes_data(
 
     # For each cropped image of the sticky notes inside the timestamped_folder_path
     for index, cropped_image in enumerate(cropped_bounding_boxes_images_data):
-
-        # Get (saved) cropped image of sticky note and check if it is a existing file
-        # cropped_image_file_path = os.path.join(
-        #     timestamped_folder_path, cropped_image['name'])
-
         if os.path.isfile(cropped_image["path"]):
             cropped_image_ocr_detections = await asyncio.create_task(
                 detect_text_with_gcloud_vision_api(cropped_image["path"])
