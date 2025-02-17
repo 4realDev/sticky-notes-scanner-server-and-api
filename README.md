@@ -84,15 +84,7 @@ protoc object_detection/protos/*.proto --python_out=.
 ```
 
 ```
-pip uninstall protobuf
-```
-
-```
 pip install --upgrade protobuf==3.20.3
-```
-
-```
-cd ..\..
 ```
 
 <br>
