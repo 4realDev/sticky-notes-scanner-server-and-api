@@ -85,6 +85,15 @@ Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio
 <br>
 <br>
 
+### 10. Setup Google Cloud Vision API for Optical Character Recognition
+***Follow the instructions inside:*** [README_how_to_register_with_google_cloud_api_ocr](https://gitlab.cando-image.com/toolbox/toolbox-scanning-api/-/blob/main/README_how_to_register_with_google_cloud_api_ocr.docx)
+
+or
+
+Google Setup Documentation ["Cloud Vision setup and cleanup"](https://cloud.google.com/vision/docs/setup)\
+Google Usage Documentation ["Using the Vision API"](https://gcloud.readthedocs.io/en/latest/vision-usage.html)
+
+
 ## II. START API
 
 ### 1. Start the Virtual Environment
