@@ -145,16 +145,10 @@ dmypy.json
 cython_debug/
 
 # OWN ADJUSTMENTS
-# ignore workspace directory
-workspace/
-# ignore anything inside workspace directory
-workspace/**
+# ignore venv directory
 venv/
+# ignore anything inside venv directory
 venv/**
-_venv/
-_venv/**
-test_data_set/
-test_data_set/**
 miro-timeframe-snapshots/
 miro-timeframe-snapshots/**
 models/

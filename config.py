@@ -33,7 +33,7 @@ save_image_overlayed_with_ocr_visualization = True
 
 # necessary for cmd commands
 BASE_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)))
-CUSTOM_MODEL_NAME_SUFFIX = '2_own_min_data'
+CUSTOM_MODEL_NAME_SUFFIX = 'sticky_notes_custom_detection_model'
 PRETRAINED_MODEL_NAME = 'ssd_resnet50_v1_fpn_640x640_coco17_tpu-8'
 num_steps = 25000
 CUSTOM_MODEL_NAME = f'{CUSTOM_MODEL_NAME_SUFFIX}_{PRETRAINED_MODEL_NAME}_{str(num_steps)}'
@@ -46,8 +46,8 @@ PIPELINE_CONFIG_NAME = 'pipeline.config'
 # paths to folders
 paths = {
     'MIRO_TIMEFRAME_SNAPSHOTS': os.path.join(BASE_PATH, 'miro-timeframe-snapshots'),
-    'ANNOTATION_PATH': os.path.join(BASE_PATH, 'workspace', CUSTOM_MODEL_NAME, 'annotations'),
-    'CUSTOM_MODEL_PATH': os.path.join(BASE_PATH, 'workspace', CUSTOM_MODEL_NAME, 'models', CUSTOM_MODEL_NAME),
+    'ANNOTATION_PATH': os.path.join(BASE_PATH, 'custom_model', CUSTOM_MODEL_NAME, 'annotations'),
+    'CUSTOM_MODEL_PATH': os.path.join(BASE_PATH, 'custom_model', CUSTOM_MODEL_NAME, 'models', CUSTOM_MODEL_NAME),
 }
 
 # paths to files
