@@ -98,7 +98,7 @@ cd ..\..
 <br>
 <br>
 
-### 10. Setup Google Cloud Vision API for Optical Character Recognition
+### 9. Setup Google Cloud Vision API for Optical Character Recognition
 ***Follow the instructions inside:*** [README_how_to_register_with_google_cloud_api_ocr](https://gitlab.cando-image.com/toolbox/toolbox-scanning-api/-/blob/main/README_how_to_register_with_google_cloud_api_ocr.docx)
 
 or
@@ -119,6 +119,34 @@ Google Usage Documentation ["Using the Vision API"](https://gcloud.readthedocs.i
 
 ```
 python -m flask --app flaskr run
+```
+
+### 3. Troubleshoot
+Sometimes there is a problem with the protobuf version.
+If the following problem occures, run those commands:
+
+```
+ImportError: cannot import name 'string_int_label_map_pb2' from 'object_detection.protos' (C:\GitHub\toolbox-scanning-api\venv\lib\site-packages\object_detection\protos\__init__.py)
+```
+
+```
+cd .\models\research
+```
+
+```
+pip install .
+```
+
+```
+pip uninstall protobuf
+```
+
+```
+pip install --upgrade protobuf==3.20.3
+```
+
+```
+cd ..\..
 ```
 
 ## III. Returned Data
