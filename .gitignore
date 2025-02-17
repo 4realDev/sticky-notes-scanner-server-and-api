@@ -151,8 +151,8 @@ venv/
 venv/**
 miro-timeframe-snapshots/
 miro-timeframe-snapshots/**
-models/
-models/**
+./models/
+./models/**
 
 
 # PyCharm
