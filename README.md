@@ -147,15 +147,18 @@ http://localhost:5000/scan-sticky-notes?debug=true
 If the `debug` flag is set to `True`, the api will create a folder named `miro-timeframe-snapshots` in which all the important data will be saved as images.
 For every scan there will be a subfolder inside `miro-timeframe-snapshots` named after the timestamp -> `miro-timeframe-snapshots/[timestamp]`
 Inside the subfolder of each scan the following images will be saved:
-- the original image with the timestamp (o.i.)
-- the object detection of the sticky notes inside the o.i.
-- the optical character recognition of the sticky note texts inside the o.i.
-- all sticky notes cropped out of the o.i. as single images
+- the original image with the timestamp
+- the cropped sticky note png images named `cropped_image_x.png`
+- the google cloud vision api OCR text detection named `_debug_all_texts_scan.png`
+- the tensorflow custom sticky note detection named `_debug_sticky_notes_scan.png`
+
+![Screenshot 2025-02-17 144708](https://github.com/user-attachments/assets/cf1a94b2-d1ce-4f82-b585-698213c5d3bb)
 
 <br/>
 <br/>
 <br/>
 <br/>
+
 
 ---
 
@@ -166,18 +169,19 @@ Inside the subfolder of each scan the following images will be saved:
 <br/>
 
 ***Image of a Miro Whiteboard Scan/Digitalisation with:***
+![2_Eval_Homeoffice_Phase_4](https://github.com/user-attachments/assets/a6f2cbac-0a08-4ea7-8645-9c820c1db46d)
 - all digitalised sticky notes on the left (`text, color, position, size`),
 - the cropped out original sticky notes in the middle (`cropped-image, position, size`),
 - and the original scan on the right:
-![2_Eval_Homeoffice_Phase_4](https://github.com/user-attachments/assets/a6f2cbac-0a08-4ea7-8645-9c820c1db46d)
 
 <br/>
 
 ***Debug Image of the Optical Character Recognition with the Google Cloud Vision API and its OCR Functionality:***
-![_debug_all_texts_scan](https://github.com/user-attachments/assets/40953c50-f045-4f95-83d5-b7a65ba10c8b)
+![_debug_all_texts_scan](https://github.com/user-attachments/assets/637f01e6-1113-4540-b888-a30056a5b3e8)
 
 <br/>
 
 ***Debug Image of the Sticky Note Object Detection with the TensorFlow Custom Object Detection Model:***
-![_debug_sticky_notes_scan](https://github.com/user-attachments/assets/8d090d06-2c4a-4893-912b-ac25db1a37c2)
+![_debug_sticky_notes_scan](https://github.com/user-attachments/assets/3ba7977c-4dbc-43a7-8e5a-1551cdf8c200)
+
 <br/>
