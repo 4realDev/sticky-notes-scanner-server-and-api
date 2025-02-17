@@ -114,12 +114,11 @@ python -m flask --app flaskr run
 ```
 
 ### 3. Troubleshoot
-Sometimes there is a problem with the protobuf version.
+Sometimes there is a problem with the `protobuf` version.
 If the following problem occures, run those commands:
 
-```
-ImportError: cannot import name 'string_int_label_map_pb2' from 'object_detection.protos' (C:\GitHub\toolbox-scanning-api\venv\lib\site-packages\object_detection\protos\__init__.py)
-```
+
+`ImportError: cannot import name 'string_int_label_map_pb2' from 'object_detection.protos' (C:\GitHub\toolbox-scanning-api\venv\lib\site-packages\object_detection\protos\__init__.py)`
 
 ```
 cd .\models\research
