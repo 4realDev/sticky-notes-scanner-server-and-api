@@ -11,7 +11,7 @@ Navigate into root directory.
 Create Virtual Environment.
 
 ```
-py -m venv env
+py -m venv venv
 ```
 
 Advantages:  
@@ -25,7 +25,7 @@ Advantages:
 (env) is visible and pip list only shows isolated packages (Lib/site-packages) in your environment  
 
 ```
-.\env\Scripts\activate
+.\venv\Scripts\activate
 ```
 
 ### 3.  Update pip Libraries and Dependencies
