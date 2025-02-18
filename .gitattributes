@@ -1,1 +1,2 @@
 custom_model/sticky_notes_ssd_resnet50_v1_fpn_640x640_coco17_tpu-8_25000/models/sticky_notes_ssd_resnet50_v1_fpn_640x640_coco17_tpu-8_25000/ckpt-26.data-00000-of-00001 filter=lfs diff=lfs merge=lfs -text
+README_how_to_register_with_google_cloud_api_ocr.pdf filter=lfs diff=lfs merge=lfs -text
