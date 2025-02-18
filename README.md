@@ -159,7 +159,7 @@ cd ..\..
 }
 ```
 
-*** Image of an HTTP example request and return in Insomnia:***
+***Image of an HTTP example request and return in Insomnia:***
 ![image](https://github.com/user-attachments/assets/305bbdb3-3275-41a1-b631-7802df6f406d)
 
 ## IV. API Request
