@@ -135,7 +135,7 @@ pip install --upgrade protobuf==3.20.3
 cd ..\..
 ```
 
-## III. Returned Data
+## III. API Returned Data Type
 ```
 {
     img_data: {
@@ -158,6 +158,9 @@ cd ..\..
     }>,
 }
 ```
+
+*** Image of an HTTP example request and return in Insomnia:***
+![image](https://github.com/user-attachments/assets/305bbdb3-3275-41a1-b631-7802df6f406d)
 
 ## IV. API Request
 ```
