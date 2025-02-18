@@ -46,11 +46,13 @@ In virtual environment run:
 python -m pip install --upgrade pip
 ```
 
-### 4.  Install `PyYAML` -> necessary for TensorFlow Object Detection
+### 4.  Install all required libraries for the API
 
 ```
-pip install PyYAML==5.3.1
-```
+pip install -r requirements.txt
+```   
+
+Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio, google-cloud-vision
 
 ### 5.  Clone Tensorflow Object Detection API / TensorFlow Model Garden
 
@@ -78,28 +80,14 @@ python -m pip install .
 Protoc "used to compile .proto files, which contain service and message definitions"  
 
 ```
-pip install --upgrade protobuf==3.20.3
-```
-
-```
 protoc object_detection/protos/*.proto --python_out=.
 ```
 
-### 9.  Install all required libraries for the API
-
 ```
-cd ..\..
+pip install --upgrade protobuf==3.20.3
 ```
 
-```
-pip install -r requirements.txt
-```   
-
-Those are: flask, flask_cors, flask[async], opencv-python, aiohttp, nest_asyncio, google-cloud-vision
-<br>
-<br>
-
-### 10. Setup Google Cloud Vision API for Optical Character Recognition
+### 9. Setup Google Cloud Vision API for Optical Character Recognition
 ***Follow the instructions inside:*** [README_how_to_register_with_google_cloud_api_ocr](https://gitlab.cando-image.com/toolbox/toolbox-scanning-api/-/blob/main/README_how_to_register_with_google_cloud_api_ocr.docx)
 
 or
@@ -107,13 +95,12 @@ or
 Google Setup Documentation ["Cloud Vision setup and cleanup"](https://cloud.google.com/vision/docs/setup)\
 Google Usage Documentation ["Using the Vision API"](https://gcloud.readthedocs.io/en/latest/vision-usage.html)
 
-
 ## II. START API
 
 ### 1. Start the Virtual Environment
 
 ```
-.\env\Scripts\activate
+.\venv\Scripts\activate
 ```
 
 ### 2.  Start the Server (localhost:5000)
@@ -122,7 +109,33 @@ Google Usage Documentation ["Using the Vision API"](https://gcloud.readthedocs.i
 python -m flask --app flaskr run
 ```
 
-## III. Returned Data
+### 3. Troubleshoot
+Sometimes there is a problem with the `protobuf` version.
+If the following problem occures, run those commands:
+
+`ImportError: cannot import name 'string_int_label_map_pb2' from 'object_detection.protos' (C:\GitHub\toolbox-scanning-api\venv\lib\site-packages\object_detection\protos\__init__.py)`
+
+```
+cd .\models\research
+```
+
+```
+pip install .
+```
+
+```
+pip uninstall protobuf
+```
+
+```
+pip install --upgrade protobuf==3.20.3
+```
+
+```
+cd ..\..
+```
+
+## III. API Returned Data Type
 ```
 {
     img_data: {
@@ -145,6 +158,9 @@ python -m flask --app flaskr run
     }>,
 }
 ```
+
+***Image of an HTTP example request and return in Insomnia:***
+![image](https://github.com/user-attachments/assets/305bbdb3-3275-41a1-b631-7802df6f406d)
 
 ## IV. API Request
 ```
