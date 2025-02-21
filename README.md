@@ -63,7 +63,7 @@ git clone https://github.com/tensorflow/models.git
 ### 6.  Copy the `setup.py` inside the `models/research` folder 
 
 ```
-copy [YOUR_PATH]\models\research\object_detection\packages\tf2\setup.py [YOUR_PATH]\models\research
+copy .\models\research\object_detection\packages\tf2\setup.py .\models\research
 ```
 
 ### 7.  Run setup.py to install all necessary libraries for TensorFlow Object Detection
