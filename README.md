@@ -15,7 +15,7 @@ git clone https://github.com/4realDev/sticky-notes-scanner-server-and-api.git
 Navigate into root directory:
 
 ```
-cd toolbox-scanning-api
+cd sticky-notes-scanner-server-and-api
 ```
 
 Create Virtual Environment.
