@@ -120,7 +120,7 @@ cd .\models\research
 ```
 
 ```
-pip install .
+python -m pip install .
 ```
 
 ```
