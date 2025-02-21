@@ -9,7 +9,7 @@
 Clone Repository:
 
 ```
-git clone https://gitlab.cando-image.com/toolbox/toolbox-scanning-api.git
+git clone https://github.com/4realDev/sticky-notes-scanner-server-and-api.git
 ```
 
 Navigate into root directory:
@@ -88,7 +88,7 @@ pip install --upgrade protobuf==3.20.3
 ```
 
 ### 9. Setup Google Cloud Vision API for Optical Character Recognition
-***Follow the instructions inside:*** [README_how_to_register_with_google_cloud_api_ocr](https://gitlab.cando-image.com/toolbox/toolbox-scanning-api/-/blob/main/README_how_to_register_with_google_cloud_api_ocr.docx)
+***Follow the instructions inside:*** [README_how_to_register_with_google_cloud_api_ocr](https://github.com/4realDev/sticky-notes-scanner-server-and-api/blob/main/README_how_to_register_with_google_cloud_api_ocr.pdf)
 
 or
 
