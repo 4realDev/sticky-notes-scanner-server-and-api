@@ -1,0 +1,20 @@
+item { 
+	id: 1
+	name: 'yellow_sticky_note'
+}
+
+item { 
+	id: 2
+	name: 'blue_sticky_note'
+}
+
+item { 
+	id: 3
+	name: 'pink_sticky_note'
+}
+
+item { 
+	id: 4
+	name: 'green_sticky_note'
+}
+
